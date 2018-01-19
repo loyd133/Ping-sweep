@@ -1,0 +1,20 @@
+import socket
+
+addr_range = "192.168.31.%d"
+
+ip_address_up = []
+
+# Use UDP. 
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+s.settimeout(2.0)
+
+for i in range(1, 254):
+    try:
+        ip = addr_range % i
+        socket.gethostbyaddr(ip)
+        ip_address_up.append(ip)
+    except socket.herror as ex:
+        pass
+
+print ip_address_up
